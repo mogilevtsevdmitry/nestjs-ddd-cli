@@ -2,8 +2,8 @@ import { Logger } from '@nestjs/common';
 import * as fs from 'fs-extra';
 import { Command, CommandRunner, Option } from 'nest-commander';
 import { join } from 'path';
-import { defaultStructures } from './folders/default';
 import { defaultFiles } from './files/default';
+import { defaultStructures } from './folders/default';
 
 interface DomainOptions {
     name: string;
@@ -42,8 +42,13 @@ export class GenerateDomainStructureCommand extends CommandRunner {
         directories.forEach((dir) => fs.ensureDirSync(dir));
 
         // Create the required files
-        const files = defaultFiles(basePath);
-        files.forEach((file) => fs.ensureFileSync(file.path));
+        const files = defaultFiles(basePath, name);
+        files.forEach((file) => {
+            fs.ensureFileSync(file.path);
+            if (file.content) {
+                files.filter((file) => file.content).forEach((file) => fs.writeFileSync(file.path, file.content));
+            }
+        });
 
         this.logger.log(`Domain structure for ${name} has been generated successfully.`);
     }

@@ -18,12 +18,13 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "g": "ts-node main.ts"
+    "g": "node ./dist/main.js ddd-cli --"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.3.1",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/cqrs": "^9.0.3",
     "@nestjs/platform-express": "^9.0.0",
     "@types/commander": "^2.12.2",
     "commander": "^10.0.1",
