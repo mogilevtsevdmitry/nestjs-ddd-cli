@@ -4,9 +4,9 @@ import { join } from 'path';
 
 export const generateDomains = () => {
     const logger = new Logger('GenerateDomains');
-    const domainsIndexPath = join('libs', 'domains', 'src', 'index.ts');
+    const gitkeep = join('libs', 'domains', 'src', '.gitkeep');
 
-    if (!fs.existsSync(domainsIndexPath)) {
+    if (!fs.existsSync(gitkeep)) {
         // Update tsconfig.json
         logger.verbose('Updating tsconfig.json...');
         const tsconfigPath = join(process.cwd(), 'tsconfig.json');
@@ -19,8 +19,8 @@ export const generateDomains = () => {
         fs.writeFileSync(tsconfigPath, JSON.stringify(tsconfig, null, 2));
 
         // Create empty index.ts
-        logger.verbose('Creating empty index.ts...');
-        fs.ensureFileSync(domainsIndexPath);
+        logger.verbose('Creating empty gitkeep...');
+        fs.ensureFileSync(gitkeep);
 
         // Update package.json
         logger.verbose('Updating package.json...');

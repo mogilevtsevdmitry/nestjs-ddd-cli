@@ -61,11 +61,6 @@ export class GenerateDomainStructureCommand extends CommandRunner {
             }
         });
 
-        this.logger.verbose('Updating libs/domains/src/index.ts...');
-        const domainsIndexPath = join('libs', 'domains', 'src', 'index.ts');
-        const indexContent = `export * from './${name}-domain';\n`;
-        fs.appendFileSync(domainsIndexPath, indexContent);
-
         this.logger.verbose(`Domain structure for ${name} has been generated successfully.`);
     }
 }
