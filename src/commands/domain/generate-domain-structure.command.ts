@@ -1,10 +1,10 @@
 import { Logger } from '@nestjs/common';
+import { generateDomains } from '@utils';
 import * as fs from 'fs-extra';
 import { Command, CommandRunner, Option } from 'nest-commander';
 import { join } from 'path';
 import { defaultFiles } from './files/default';
 import { defaultStructures } from './folders/default';
-import { generateDomains } from '@utils';
 
 interface DomainOptions {
     name: string;
@@ -32,7 +32,14 @@ export class GenerateDomainStructureCommand extends CommandRunner {
         const [name] = inputs;
 
         if (!name) {
-            console.error('Error: Please provide a name using --name option');
+            this.logger.error('Error: Please provide a name using --name option');
+            process.exit(1);
+        }
+
+        // Check if domain with the same name exists
+        const domainPath = join('libs', 'domains', 'src', `${name}-domain`);
+        if (fs.existsSync(domainPath)) {
+            this.logger.error(`Error: Domain with name "${name}" already exists!`);
             process.exit(1);
         }
 
@@ -53,6 +60,11 @@ export class GenerateDomainStructureCommand extends CommandRunner {
                 files.filter((file) => file.content).forEach((file) => fs.writeFileSync(file.path, file.content));
             }
         });
+
+        this.logger.verbose('Updating libs/domains/src/index.ts...');
+        const domainsIndexPath = join('libs', 'domains', 'src', 'index.ts');
+        const indexContent = `export * from './${name}-domain';\n`;
+        fs.appendFileSync(domainsIndexPath, indexContent);
 
         this.logger.verbose(`Domain structure for ${name} has been generated successfully.`);
     }
