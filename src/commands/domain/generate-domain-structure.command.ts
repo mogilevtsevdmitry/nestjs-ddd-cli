@@ -50,6 +50,6 @@ export class GenerateDomainStructureCommand extends CommandRunner {
             }
         });
 
-        this.logger.log(`Domain structure for ${name} has been generated successfully.`);
+        this.logger.verbose(`Domain structure for ${name} has been generated successfully.`);
     }
 }
