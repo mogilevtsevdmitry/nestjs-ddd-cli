@@ -4,6 +4,7 @@ import { Command, CommandRunner, Option } from 'nest-commander';
 import { join } from 'path';
 import { defaultFiles } from './files/default';
 import { defaultStructures } from './folders/default';
+import { generateDomains } from '@utils';
 
 interface DomainOptions {
     name: string;
@@ -34,6 +35,9 @@ export class GenerateDomainStructureCommand extends CommandRunner {
             console.error('Error: Please provide a name using --name option');
             process.exit(1);
         }
+
+        // Check domains exists
+        generateDomains();
 
         const basePath = join('libs', 'domains', 'src', `${name}-domain`);
 
