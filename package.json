@@ -1,7 +1,7 @@
 {
     "name": "@webmogilevtsev/nestjs-ddd-cli",
-    "version": "1.0.6",
-    "description": "<div id=\"readme-container\"><!-- markdown start -->\n\n[English readme content goes here]\n\n<!-- markdown end --></div><button id=\"readme-toggle-button\">Русский</button><script src=\"toggle-readme.js\"></script>",
+    "version": "1.0.7",
+    "description": "Domain Driven Design (DDD) Structure Generator is a CLI tool for quickly creating well-organized application architectures based on DDD principles. It generates boilerplate code for essential building blocks, allowing developers to focus on solving complex business problems while reducing development time and enhancing software quality.",
     "author": "Mogilevtsev Dmitry <webmogilevtsev@ya.ru>",
     "license": "MIT",
     "main": "dist/main.js",

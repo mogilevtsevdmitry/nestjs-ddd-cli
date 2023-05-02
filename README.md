@@ -4,10 +4,8 @@ To install the application for generating folder and file structure for a domain
 npm install @webmogilevtsev/nestjs-ddd-cli --save-dev
 ```
 After installing the package, you need to add a script to the package.json file so that you can run the `generate:domain` command. Add the following line to the `"scripts"` section:
-`"scripts"`:
 ```json
 "scripts": {
-  ...,
   "generate:domain": "generate-domain"
 }
 
