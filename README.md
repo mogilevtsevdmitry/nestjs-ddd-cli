@@ -1,73 +1,76 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+## Описание
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Это приложение для генерации структуры папок и файлов для домена в проекте на NestJS. Команда `generate:domain` генерирует структуру папок и файлов для нового домена, включая следующие каталоги:
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- `application-services/commands`
+- `application-services/dto`
+- `application-services/events`
+- `application-services/facade`
+- `application-services/queries`
+- `domain/services`
+- `domain/repositories`
+- `domain/sagas`
+- `domain`
 
-## Description
+## Команда
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
-
+Чтобы сгенерировать новый домен, необходимо запустить команду `generate:domain` с аргументом `name`, который задает имя домена:
 ```bash
-$ yarn install
+npm run generate:domain -- --name=example
 ```
 
-## Running the app
+Имя домена должно начинаться с маленькой буквы. Если имя домена содержит несколько слов, они должны быть разделены дефисами. Например: `customer-order`.
 
+## Структура каталогов
+
+Структура папок и файлов, создаваемая командой `generate:domain`, выглядит следующим образом:
 ```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
+libs/
+  domains/
+    src/
+      example-domain/
+        application-services/
+          commands/
+            index.ts
+          dto/
+            index.ts
+          events/
+            index.ts
+          facade/
+            example-facade.factory.ts
+            example-facade.service.ts
+          queries/
+            index.ts
+        domain/
+          services/
+            example-domain.service.ts
+          example-domain.interface.ts
+          example-domain.aggregate.ts
+          index.ts
+        repositories/
+          example-domain-repository.abstract.ts
+          index.ts
+        sagas/
+          example-domain-saga.service.ts
+        example-domain.module.ts
+        index.ts
+    index.ts
 ```
+- `application-services/commands/` - каталог с командами для управления доменом.
+- `application-services/dto/` - каталог с объектами передачи данных для использования в приложении.
+- `application-services/events/` - каталог с событиями, отправляемыми доменом.
+- `application-services/facade/` - каталог с классами фасада, которые предоставляют простой интерфейс для взаимодействия с доменом.
+- `application-services/queries/` - каталог с запросами для получения данных из домена.
+- `domain/services/` - каталог с сервисами домена, которые реализуют бизнес-логику.
+- `domain/repositories/` - каталог с репозиториями домена, которые осуществляют доступ к данным.
+- `domain/sagas/` - каталог с сагами, которые координируют сложные потоки работы между компонентами домена.
+- `domain/` - каталог, содержащий интерфейс домена, а также агрегаты и другие компоненты.
+- `example-domain.module.ts` - модуль, объединяющий все компоненты домена.
+- `index.ts` - файл, экспортирующий все домены из папки src/.
 
-## Test
+## Использование
 
-```bash
-# unit tests
-$ yarn run test
+После того, как вы создали новый домен с помощью команды `generate:domain`, вы можете начать работать с его компонентами. Обычно вы будете добавлять новые методы в сервисы домена, настраивать репозитории и создавать новые агрегаты.
 
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+## Заключение
+В этом руководстве мы рассмотрели, как создать приложение на NestJS для генерации структуры папок и файлов для нового домена. Мы написали команду `generate:domain`, которая создает все необходимые каталоги и файлы для нового домена, а также обновляет файл `libs/domains/src/index.ts` для добавления экспорта нового домена.
