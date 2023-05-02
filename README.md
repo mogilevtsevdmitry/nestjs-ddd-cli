@@ -1,3 +1,65 @@
+<div id="language-tabs">
+  <table>
+    <thead>
+      <tr>
+        <th>
+          <button onclick="toggleTab('en')">English</button>
+        </th>
+        <th>
+          <button onclick="toggleTab('ru')">Русский</button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>English</td>
+        <td style="display: none;" id="ru">Russian</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  function toggleTab(language) {
+    if (language === 'en') {
+      document.getElementById('ru').style.display = 'none';
+      document.getElementById('en').style.display = 'table-cell';
+    } else {
+      document.getElementById('en').style.display = 'none';
+      document.getElementById('ru').style.display = 'table-cell';
+    }
+  }
+</script>
+
+## Установка
+Для установки приложения для генерации структуры папок и файлов для домена в проекте на NestJS вы можете использовать пакет `@webmogilevtsev/nestjs-ddd-cli`. Вы можете установить его с помощью следующей команды:
+```bash
+npm install @webmogilevtsev/nestjs-ddd-cli --save-dev
+```
+После установки пакета вам нужно добавить скрипт в файл package.json, чтобы можно было запускать команду `generate:domain`. Добавьте следующую строку в раздел `"scripts"`:
+```bash
+"scripts": {
+  ...
+  "generate:domain": "generate-domain"
+}
+
+```
+Теперь вы можете запускать команду generate:domain с аргументом name, чтобы создать новый домен:
+```
+npm run generate:domain -- --name=example
+```
+Аргумент name задает имя нового домена.
+
+## Глобальная установка
+Вы также можете установить `@webmogilevtsev/nestjs-ddd-cli` глобально, чтобы использовать команду `generate-domain` в любом проекте на NestJS. Для этого выполните следующую команду:
+```bash
+npm install -g @webmogilevtsev/nestjs-ddd-cli
+```
+После глобальной установки вы можете запускать команду `generate-domain` из любой папки на вашем компьютере:
+```bash
+generate-domain example
+```
+
 ## Описание
 
 Это приложение для генерации структуры папок и файлов для домена в проекте на NestJS. Команда `generate:domain` генерирует структуру папок и файлов для нового домена, включая следующие каталоги:
