@@ -1,11 +1,10 @@
-# ENGLISH
-
-## Установка
-Для установки приложения для генерации структуры папок и файлов для домена в проекте на NestJS вы можете использовать пакет `@webmogilevtsev/nestjs-ddd-cli`. Вы можете установить его с помощью следующей команды:
+## Installation
+To install the application for generating folder and file structure for a domain in a NestJS project, you can use the `@webmogilevtsev/nestjs-ddd-cli` package. You can install it using the following command:
 ```bash
 npm install @webmogilevtsev/nestjs-ddd-cli --save-dev
 ```
-После установки пакета вам нужно добавить скрипт в файл package.json, чтобы можно было запускать команду `generate:domain`. Добавьте следующую строку в раздел `"scripts"`:
+After installing the package, you need to add a script to the package.json file so that you can run the `generate:domain` command. Add the following line to the `"scripts"` section:
+`"scripts"`:
 ```bash
 "scripts": {
   ...
@@ -13,25 +12,25 @@ npm install @webmogilevtsev/nestjs-ddd-cli --save-dev
 }
 
 ```
-Теперь вы можете запускать команду generate:domain с аргументом name, чтобы создать новый домен:
+Now you can run the generate:domain command with the name argument to create a new domain:
 ```
 npm run generate:domain -- --name=example
 ```
-Аргумент name задает имя нового домена.
+The name argument sets the name of the new domain.
 
-## Глобальная установка
-Вы также можете установить `@webmogilevtsev/nestjs-ddd-cli` глобально, чтобы использовать команду `generate-domain` в любом проекте на NestJS. Для этого выполните следующую команду:
+## Global installation
+You can also install `@webmogilevtsev/nestjs-ddd-cli` globally to use the `generate-domain` command in any NestJS project. To do this, run the following command:
 ```bash
 npm install -g @webmogilevtsev/nestjs-ddd-cli
 ```
-После глобальной установки вы можете запускать команду `generate-domain` из любой папки на вашем компьютере:
+After global installation, you can run the generate-domain command from any folder on your computer:
 ```bash
 generate-domain example
 ```
 
-## Описание
+## Description
 
-Это приложение для генерации структуры папок и файлов для домена в проекте на NestJS. Команда `generate:domain` генерирует структуру папок и файлов для нового домена, включая следующие каталоги:
+This is an application for generating folder and file structure for a domain in a NestJS project. The `generate:domain` command generates the folder and file structure for a new domain, including the following directories:
 
 - `application-services/commands`
 - `application-services/dto`
@@ -43,18 +42,18 @@ generate-domain example
 - `domain/sagas`
 - `domain`
 
-## Команда
+## Command
 
-Чтобы сгенерировать новый домен, необходимо запустить команду `generate:domain` с аргументом `name`, который задает имя домена:
+To generate a new domain, you need to run the `generate:domain` command with the `name` argument, which sets the domain name:
 ```bash
 npm run generate:domain -- --name=example
 ```
 
-Имя домена должно начинаться с маленькой буквы. Если имя домена содержит несколько слов, они должны быть разделены дефисами. Например: `customer-order`.
+The domain name should start with a lowercase letter. If the domain name contains multiple words, they should be separated by hyphens. For example: `customer-order`.
 
-## Структура каталогов
+## Directory Structure
 
-Структура папок и файлов, создаваемая командой `generate:domain`, выглядит следующим образом:
+The folder and file structure created by the `generate:domain` command looks like this:
 ```bash
 libs/
   domains/
@@ -87,21 +86,20 @@ libs/
         index.ts
     index.ts
 ```
-- `application-services/commands/` - каталог с командами для управления доменом.
-- `application-services/dto/` - каталог с объектами передачи данных для использования в приложении.
-- `application-services/events/` - каталог с событиями, отправляемыми доменом.
-- `application-services/facade/` - каталог с классами фасада, которые предоставляют простой интерфейс для взаимодействия с доменом.
-- `application-services/queries/` - каталог с запросами для получения данных из домена.
-- `domain/services/` - каталог с сервисами домена, которые реализуют бизнес-логику.
-- `domain/repositories/` - каталог с репозиториями домена, которые осуществляют доступ к данным.
-- `domain/sagas/` - каталог с сагами, которые координируют сложные потоки работы между компонентами домена.
-- `domain/` - каталог, содержащий интерфейс домена, а также агрегаты и другие компоненты.
-- `example-domain.module.ts` - модуль, объединяющий все компоненты домена.
-- `index.ts` - файл, экспортирующий все домены из папки src/.
+- `application-services/commands/` - directory with commands for managing the domain.
+- `application-services/dto/` - directory with data transfer objects for use in the application.
+- `application-services/events/` - directory with events emitted by the domain.
+- `application-services/facade/` - directory with facade classes that provide a simple interface for interacting with the domain.
+- `application-services/queries/` - directory with queries for retrieving data from the domain.
+- `domain/services/` - directory with domain services that implement business logic.
+- `domain/repositories/` - directory with domain repositories that provide access to data.
+- `domain/sagas/` - directory with sagas that coordinate complex workflows between domain components.
+- `domain/` - directory containing the domain interface, as well as aggregates and other components.
+- `example-domain.module.ts` - module that combines all domain components.
+- `index.ts` - file exporting all domains from the src/ folder.
 
-## Использование
+## Usage
+After you have created a new domain using the `generate:domain` command, you can start working with its components. Typically, you will be adding new methods to domain services, configuring repositories, and creating new aggregates.
 
-После того, как вы создали новый домен с помощью команды `generate:domain`, вы можете начать работать с его компонентами. Обычно вы будете добавлять новые методы в сервисы домена, настраивать репозитории и создавать новые агрегаты.
-
-## Заключение
-В этом руководстве мы рассмотрели, как создать приложение на NestJS для генерации структуры папок и файлов для нового домена. Мы написали команду `generate:domain`, которая создает все необходимые каталоги и файлы для нового домена, а также обновляет файл `libs/domains/src/index.ts` для добавления экспорта нового домена.
+## Conclusion
+In this guide, we have looked at how to create a NestJS application for generating folder and file structure for a new domain. We wrote the `generate:domain` command, which creates all necessary directories and files for a new domain, as well as updates the `libs/domains/src/index.ts` file to add the export of the new domain.

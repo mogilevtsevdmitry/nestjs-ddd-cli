@@ -1,6 +1,6 @@
 {
     "name": "@webmogilevtsev/nestjs-ddd-cli",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "<div id=\"readme-container\"><!-- markdown start -->\n\n[English readme content goes here]\n\n<!-- markdown end --></div><button id=\"readme-toggle-button\">Русский</button><script src=\"toggle-readme.js\"></script>",
     "author": "Mogilevtsev Dmitry <webmogilevtsev@ya.ru>",
     "license": "MIT",
