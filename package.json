@@ -3,7 +3,6 @@
     "version": "1.0.0",
     "description": "",
     "author": "Mogilevtsev Dmitry <webmogilevtsev@ya.ru>",
-    "private": true,
     "license": "MIT",
     "main": "dist/main.js",
     "repository": {
