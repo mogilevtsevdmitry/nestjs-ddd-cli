@@ -1,5 +1,5 @@
 {
-    "name": "nestjs-ddd-cli",
+    "name": "@webmogilevtsev/nestjs-ddd-cli",
     "version": "1.0.0",
     "description": "",
     "author": "Mogilevtsev Dmitry <webmogilevtsev@ya.ru>",
@@ -8,6 +8,9 @@
     "repository": {
         "type": "git",
         "url": "https://github.com/mogilevtsevdmitry/nestjs-ddd-cli"
+    },
+    "publishConfig": {
+      "access": "public"
     },
     "keywords": [
         "nestjs",
