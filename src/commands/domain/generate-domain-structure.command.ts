@@ -1,6 +1,6 @@
 import { Logger } from '@nestjs/common';
 import { generateDomains } from '@utils';
-import chalk from 'chalk';
+import * as chalk from 'chalk';
 import * as fs from 'fs-extra';
 import { Command, CommandRunner, Option } from 'nest-commander';
 import { join } from 'path';
