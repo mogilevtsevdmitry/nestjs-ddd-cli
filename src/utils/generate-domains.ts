@@ -47,6 +47,11 @@ export const generateDomains = () => {
         }
         packageJson.jest.moduleNameMapper['^@domains(|/.*)$'] = '<rootDir>/libs/$1';
 
+        if (!packageJson.scripts) {
+            packageJson.scripts = {};
+        }
+        packageJson.scripts['generate:domain'] = 'generate-domain';
+
         fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
         // Update test/jest-e2e.json
