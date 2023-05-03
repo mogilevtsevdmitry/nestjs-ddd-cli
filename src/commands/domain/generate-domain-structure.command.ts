@@ -1,14 +1,11 @@
 import { Logger } from '@nestjs/common';
 import { generateDomains } from '@utils';
+import chalk from 'chalk';
 import * as fs from 'fs-extra';
 import { Command, CommandRunner, Option } from 'nest-commander';
 import { join } from 'path';
 import { defaultFiles } from './files/default';
 import { defaultStructures } from './folders/default';
-
-interface DomainOptions {
-    name: string;
-}
 
 @Command({
     name: 'ddd-cli',
@@ -32,14 +29,14 @@ export class GenerateDomainStructureCommand extends CommandRunner {
         const [name] = inputs;
 
         if (!name) {
-            this.logger.error('Error: Please provide a name using --name option');
+            console.error(chalk.red('Error: Please provide a name using --name option'));
             process.exit(1);
         }
 
         // Check if domain with the same name exists
         const domainPath = join('libs', 'domains', 'src', `${name}-domain`);
         if (fs.existsSync(domainPath)) {
-            this.logger.error(`Error: Domain with name "${name}" already exists!`);
+            console.error(chalk.red(`Error: Domain with name "${name}" already exists!`));
             process.exit(1);
         }
 
@@ -53,8 +50,10 @@ export class GenerateDomainStructureCommand extends CommandRunner {
         directories.forEach((dir) => fs.ensureDirSync(dir));
 
         // Create the required files
+        console.log(chalk.gray('Start generate structure'));
         const files = defaultFiles(basePath, name);
         files.forEach((file) => {
+            console.log(chalk.green('CREATE ' + file.path));
             fs.ensureFileSync(file.path);
             if (file.content) {
                 files.filter((file) => file.content).forEach((file) => fs.writeFileSync(file.path, file.content));
