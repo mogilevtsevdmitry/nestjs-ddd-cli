@@ -3,6 +3,6 @@ import { CommandFactory } from 'nest-commander';
 import { Logger } from '@nestjs/common';
 
 async function bootstrap() {
-    await CommandFactory.run(AppModule, ['error', 'verbose']);
+    await CommandFactory.run(AppModule, ['error', 'verbose', 'log']);
 }
 bootstrap();
