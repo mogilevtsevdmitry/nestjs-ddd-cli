@@ -28,7 +28,7 @@ export class GenerateDomainStructureCommand extends CommandRunner {
         return val;
     }
 
-    async run(inputs: string[], options: DomainOptions): Promise<void> {
+    async run(inputs: string[]): Promise<void> {
         const [name] = inputs;
 
         if (!name) {

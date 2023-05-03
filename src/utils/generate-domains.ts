@@ -92,5 +92,21 @@ export const generateDomains = () => {
             };
         }
         fs.writeFileSync(nestCliPath, JSON.stringify(nestCli, null, 2));
+
+        // add tsconfig.lib.json
+        const tsConfigLibPath = join('libs', 'domains', 'tsconfig.lib.json');
+        if (!fs.existsSync(tsConfigLibPath)) {
+            fs.ensureFileSync(tsConfigLibPath);
+            const tsConfigLibContent = `{
+"extends": "../../tsconfig.json",
+"compilerOptions": {
+    "declaration": true,
+    "outDir": "../../dist/libs/domains"
+},
+"include": ["src/**/*"],
+"exclude": ["node_modules", "dist", "test", "**/*spec.ts"]
+}`;
+            fs.writeFileSync(tsConfigLibPath, tsConfigLibContent);
+        }
     }
 };
