@@ -22,6 +22,7 @@
     },
     "readme_en_md_content": "[English readme content goes here]",
     "readme_ru_md_content": "[Russian readme content goes here]",
+    "postinstall": "node ./add-generate-domain-script.js",
     "scripts": {
         "build": "nest build",
         "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"libs/**/*.ts\"",
