@@ -1,18 +1,16 @@
-import { Logger } from '@nestjs/common';
+import chalk from 'chalk';
 import * as fs from 'fs-extra';
 import { join } from 'path';
 
 export const generateDomains = () => {
-    const logger = new Logger('GenerateDomains');
     const gitkeep = join('libs', 'domains', 'src', 'index.ts');
 
     if (!fs.existsSync(gitkeep)) {
         // Create empty .gitkeep
-        logger.verbose('Creating empty index...');
         fs.ensureFileSync(gitkeep);
 
         // Update tsconfig.json
-        logger.verbose('Updating tsconfig.json...');
+        console.log(chalk.cyan('UPDATING tsconfig.json...'));
         const tsconfigPath = join(process.cwd(), 'tsconfig.json');
         const tsconfig = JSON.parse(fs.readFileSync(tsconfigPath, 'utf8'));
 
@@ -26,7 +24,7 @@ export const generateDomains = () => {
         fs.writeFileSync(tsconfigPath, JSON.stringify(tsconfig, null, 2));
 
         // Update package.json
-        logger.verbose('Updating package.json...');
+        console.log(chalk.cyan('UPDATING package.json...'));
         const packageJsonPath = join(process.cwd(), 'package.json');
         const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
         // update rootDir
@@ -59,7 +57,7 @@ export const generateDomains = () => {
         fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
         // Update test/jest-e2e.json
-        logger.verbose('Updating test/jest-e2e.json...');
+        console.log(chalk.cyan('UPDATING test/jest-e2e.json...'));
         const jestE2EPath = join(process.cwd(), 'test', 'jest-e2e.json');
         const jestE2E = JSON.parse(fs.readFileSync(jestE2EPath, 'utf8'));
 
@@ -73,6 +71,7 @@ export const generateDomains = () => {
         fs.writeFileSync(jestE2EPath, JSON.stringify(jestE2E, null, 2));
 
         // Update nest-cli.json
+        console.log(chalk.cyan('UPDATING nest-cli.json...'));
         const nestCliPath = join(process.cwd(), 'nest-cli.json');
         const nestCli = JSON.parse(fs.readFileSync(nestCliPath, 'utf8'));
 
@@ -94,6 +93,7 @@ export const generateDomains = () => {
         fs.writeFileSync(nestCliPath, JSON.stringify(nestCli, null, 2));
 
         // add tsconfig.lib.json
+        console.log(chalk.green('CREATING libs/domains/tsconfig.lib.json...'));
         const tsConfigLibPath = join('libs', 'domains', 'tsconfig.lib.json');
         if (!fs.existsSync(tsConfigLibPath)) {
             fs.ensureFileSync(tsConfigLibPath);
