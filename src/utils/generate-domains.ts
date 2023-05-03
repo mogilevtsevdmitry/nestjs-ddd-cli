@@ -4,11 +4,11 @@ import { join } from 'path';
 
 export const generateDomains = () => {
     const logger = new Logger('GenerateDomains');
-    const gitkeep = join('libs', 'domains', 'src', '.gitkeep');
+    const gitkeep = join('libs', 'domains', 'src', 'index.ts');
 
     if (!fs.existsSync(gitkeep)) {
         // Create empty .gitkeep
-        logger.verbose('Creating empty gitkeep...');
+        logger.verbose('Creating empty index...');
         fs.ensureFileSync(gitkeep);
 
         // Update tsconfig.json
@@ -29,11 +29,8 @@ export const generateDomains = () => {
         logger.verbose('Updating package.json...');
         const packageJsonPath = join(process.cwd(), 'package.json');
         const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
-
-        // update format
-        packageJson.format = 'prettier --write \\"src/**/*.ts\\" \\"test/**/*.ts\\" \\"libs/**/*.ts\\"';
         // update rootDir
-        packageJson.rootDir = '"."';
+        packageJson.rootDir = '.';
 
         // Add Jest root and moduleNameMapper
         if (!packageJson.jest) {
@@ -42,6 +39,9 @@ export const generateDomains = () => {
 
         if (!packageJson.jest.roots) {
             packageJson.jest.roots = [];
+        }
+        if (!packageJson.jest.roots.includes('<rootDir>/src/')) {
+            packageJson.jest.roots.push('<rootDir>/src/');
         }
         packageJson.jest.roots.push('<rootDir>/libs/');
 
@@ -53,7 +53,8 @@ export const generateDomains = () => {
         if (!packageJson.scripts) {
             packageJson.scripts = {};
         }
-        packageJson.scripts['generate:domain'] = 'generate-domain';
+        // update format
+        packageJson.scripts.format = 'prettier --write "src/**/*.ts" "test/**/*.ts" "libs/**/*.ts"';
 
         fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
@@ -67,8 +68,29 @@ export const generateDomains = () => {
             jestE2E.moduleNameMapper = {};
         }
         jestE2E.moduleNameMapper['@domains/(.*)'] = '<rootDir>/../libs/$1';
-        jestE2E.moduleNameMapper['@ldomainsib'] = '<rootDir>/../libs';
+        jestE2E.moduleNameMapper['@domains'] = '<rootDir>/../libs';
 
         fs.writeFileSync(jestE2EPath, JSON.stringify(jestE2E, null, 2));
+
+        // Update nest-cli.json
+        const nestCliPath = join(process.cwd(), 'nest-cli.json');
+        const nestCli = JSON.parse(fs.readFileSync(nestCliPath, 'utf8'));
+
+        nestCli.compilerOptions['webpack'] = true;
+        if (!nestCli.projects) {
+            nestCli.projects = {};
+        }
+        if (!nestCli.projects['domains']) {
+            nestCli.projects['domains'] = {
+                type: 'library',
+                root: 'libs/domains',
+                entryFile: 'index',
+                sourceRoot: 'libs/domains/src',
+                compilerOptions: {
+                    tsConfigPath: 'libs/domains/tsconfig.lib.json',
+                },
+            };
+        }
+        fs.writeFileSync(nestCliPath, JSON.stringify(nestCli, null, 2));
     }
 };
