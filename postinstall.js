@@ -9,6 +9,7 @@ if (!packageJson.scripts) {
 }
 
 if (!packageJson.scripts['generate:domain']) {
+    console.info('Add generate:domain to package.json');
     packageJson.scripts['generate:domain'] = generateDomainScript;
 }
 
