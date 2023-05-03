@@ -6,10 +6,6 @@ import { join } from 'path';
 import { defaultFiles } from './files/default';
 import { defaultStructures } from './folders/default';
 
-interface DomainOptions {
-    name: string;
-}
-
 @Command({
     name: 'ddd-cli',
     description: 'Name for the domain structure',
@@ -17,7 +13,7 @@ interface DomainOptions {
     options: { isDefault: true },
 })
 export class GenerateDomainStructureCommand extends CommandRunner {
-    private readonly logger = new Logger(GenerateDomainStructureCommand.name);
+    private readonly logger = new Logger(GenerateDomainStructureCommand.name, { timestamp: false });
 
     @Option({
         flags: '--orm [string]',
@@ -55,6 +51,7 @@ export class GenerateDomainStructureCommand extends CommandRunner {
         // Create the required files
         const files = defaultFiles(basePath, name);
         files.forEach((file) => {
+            this.logger.log(`CREATE ${file.path}`);
             fs.ensureFileSync(file.path);
             if (file.content) {
                 files.filter((file) => file.content).forEach((file) => fs.writeFileSync(file.path, file.content));
