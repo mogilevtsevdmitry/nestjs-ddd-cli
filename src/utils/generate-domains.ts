@@ -17,6 +17,9 @@ export const generateDomains = () => {
         const tsconfig = JSON.parse(fs.readFileSync(tsconfigPath, 'utf8'));
 
         // Update aliases
+        if (!tsconfig.compilerOptions.paths) {
+            tsconfig.compilerOptions.paths = {};
+        }
         tsconfig.compilerOptions.paths['@domains'] = ['libs/domains/src'];
         tsconfig.compilerOptions.paths['@domains/*'] = ['libs/domains/src/*'];
 
