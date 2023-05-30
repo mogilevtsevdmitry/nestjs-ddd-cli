@@ -42,7 +42,9 @@ export const generateDomains = () => {
         if (!packageJson.jest.roots.includes('<rootDir>/src/')) {
             packageJson.jest.roots.push('<rootDir>/src/');
         }
-        packageJson.jest.roots.push('<rootDir>/libs/');
+        if (!packageJson.jest.roots.includes('<rootDir>/libs/')) {
+            packageJson.jest.roots.push('<rootDir>/libs/');
+        }
 
         if (!packageJson.jest.moduleNameMapper) {
             packageJson.jest.moduleNameMapper = {};
