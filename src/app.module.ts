@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
-import { GenerateDomainStructureCommand } from './commands/domain/generate-domain-structure.command';
+import { COMMANDS } from './commands';
 
 @Module({
-    imports: [],
-    providers: [GenerateDomainStructureCommand],
+    providers: [...COMMANDS],
 })
 export class AppModule {}

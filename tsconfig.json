@@ -23,6 +23,12 @@
       ],
       "@utils/*": [
         "./src/utils/*"
+      ],
+      "@domains": [
+        "libs/domains/src"
+      ],
+      "@domains/*": [
+        "libs/domains/src/*"
       ]
     }
   }

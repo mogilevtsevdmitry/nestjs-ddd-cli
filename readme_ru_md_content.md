@@ -7,15 +7,22 @@ npm install @webmogilevtsev/nestjs-ddd-cli --save-dev
 ```bash
 "scripts": {
   ...
-  "generate:domain": "generate-domain"
+  "generate:domain": "ddd-cli domain --",
+  "generate:command": "ddd-cli command"
 }
 
 ```
 Теперь вы можете запускать команду generate:domain с аргументом name, чтобы создать новый домен:
 ```
-npm run generate:domain -- --name=example
+npm run generate:domain --name=<domain-name>
 ```
 Аргумент name задает имя нового домена.
+
+Для создания команды наберите:
+```
+npm run generate:command <command-name> --domain=<domain-name>
+```
+Аргумент domain указывает для какого домена необходимо создать команду.
 
 ## Глобальная установка
 Вы также можете установить `@webmogilevtsev/nestjs-ddd-cli` глобально, чтобы использовать команду `generate-domain` в любом проекте на NestJS. Для этого выполните следующую команду:
