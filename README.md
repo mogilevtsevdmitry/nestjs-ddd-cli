@@ -4,8 +4,10 @@ To install the application for generating folder and file structure for a domain
 npm install @webmogilevtsev/nestjs-ddd-cli --save-dev
 ```
 After installing the package, you need to add a script to the package.json file so that you can run the `generate:domain` command. Add the following line to the `"scripts"` section:
-```json
+`"scripts"`:
+```bash
 "scripts": {
+  ...
   "generate:domain": "ddd-cli domain --",
   "generate:command": "ddd-cli command"
 }
@@ -51,7 +53,16 @@ This is an application for generating folder and file structure for a domain in 
 
 To generate a new domain, you need to run the `generate:domain` command with the `name` argument, which sets the domain name:
 ```bash
-npm run generate:domain example
+npm run generate:domain -- --name=example
+```
+
+The domain name must start with a small letter. If the domain name contains multiple words, they must be separated by hyphens. For example: `customer-order`.
+
+To generate a new command, you need to run the `generate:command` command with a `name` argument that specifies the name of the command and a `domain` argument to specify which domain the command belongs to:
+```bash
+npm run generate:command --name=example -- --domain=example
+# Abbreviated notation
+npm run generate:command example -- -d example
 ```
 
 The domain name should start with a lowercase letter. If the domain name contains multiple words, they should be separated by hyphens. For example: `customer-order`.
@@ -61,34 +72,35 @@ The domain name should start with a lowercase letter. If the domain name contain
 The folder and file structure created by the `generate:domain` command looks like this:
 ```bash
 libs/
-├── domains/
-│   ├── src/
-│   │   ├── example-domain/
-│   │   │   ├── application-services/
-│   │   │   ├── commands/
-│   │   │   │   └── index.ts
-│   │   │   ├── dto/
-│   │   │   │   └── index.ts
-│   │   │   ├── events/
-│   │   │   │   └── index.ts
-│   │   │   ├── facade/
-│   │   │   │   ├── example-facade.factory.ts
-│   │   │   │   ├── example-facade.service.ts
-│   │   │   ├── queries/
-│   │   │   │   └── index.ts
-│   │   │   ├── domain/
-│   │   │   │   ├── services/
-│   │   │   │   │   └── example-domain.service.ts
-│   │   │   │   ├── example-domain.interface.ts
-│   │   │   │   ├── example-domain.aggregate.ts
-│   │   │   │   └── index.ts
-│   │   │   ├── repositories/
-│   │   │   │   ├── example-domain-repository.abstract.ts
-│   │   │   │   └── index.ts
-│   │   │   ├── sagas/
-│   │   │   │   └── example-domain-saga.service.ts
-│   │   │   ├── example-domain.module.ts
-│   │   │   └── index.ts
+  domains/
+    src/
+      example-domain/
+        application-services/
+          commands/
+            index.ts
+          dto/
+            index.ts
+          events/
+            index.ts
+          facade/
+            example-facade.factory.ts
+            example-facade.service.ts
+          queries/
+            index.ts
+        domain/
+          services/
+            example-domain.service.ts
+          example-domain.interface.ts
+          example-domain.aggregate.ts
+          index.ts
+        repositories/
+          example-domain-repository.abstract.ts
+          index.ts
+        sagas/
+          example-domain-saga.service.ts
+        example-domain.module.ts
+        index.ts
+    index.ts
 ```
 - `application-services/commands/` - directory with commands for managing the domain.
 - `application-services/dto/` - directory with data transfer objects for use in the application.
