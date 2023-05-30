@@ -1,3 +1,4 @@
+import { Logger } from '@nestjs/common';
 import { capitalizeName, format } from '@utils';
 import { readFile, writeFile } from 'fs-extra';
 
@@ -65,7 +66,7 @@ export * from './${name}/${name}.command-handler';`;
     await writeFile(filePath, updatedContent, 'utf8');
 
     // format by eslint and prettier
-    console.log('Start formatting... 👻');
+    Logger.log('Start formatting... 👻');
     format(filePath);
-    console.info('Formatting was success 🎉');
+    Logger.log('Formatting was success 🎉');
 };
