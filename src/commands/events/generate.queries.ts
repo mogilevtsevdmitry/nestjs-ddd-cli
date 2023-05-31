@@ -1,18 +1,18 @@
 import { Logger } from '@nestjs/common';
 import { Command, CommandRunner, Option } from 'nest-commander';
-import { ICommandOptions } from './interfaces';
+import { IEventOptions } from './interfaces';
 import { run } from './scripts';
 
 @Command({
-    name: 'command',
-    description: 'Command for domain application',
+    name: 'event',
+    description: 'Event for domain application',
     arguments: '<name>',
     options: { isDefault: true },
 })
-export class GenerateCommand extends CommandRunner {
-    private readonly logger = new Logger(GenerateCommand.name, { timestamp: false });
+export class GenerateEvent extends CommandRunner {
+    private readonly logger = new Logger(GenerateEvent.name, { timestamp: false });
 
-    async run(passedParams: string[], options: ICommandOptions): Promise<void> {
+    async run(passedParams: string[], options: IEventOptions): Promise<void> {
         await run(passedParams, options, this.logger);
     }
 

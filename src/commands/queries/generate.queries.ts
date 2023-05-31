@@ -19,6 +19,7 @@ export class GenerateQuery extends CommandRunner {
     @Option({
         flags: '-d, --domain [domain]',
         description: 'Name of domain',
+        required: true,
     })
     domain(val: string): string {
         return val;

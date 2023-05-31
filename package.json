@@ -37,7 +37,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "g:domain": "node ./dist/main.js domain --",
     "g:command": "node ./dist/main.js command",
-    "g:query": "node ./dist/main.js query"
+    "g:query": "node ./dist/main.js query",
+    "g:event": "node ./dist/main.js event"
   },
   "dependencies": {
     "commander": "^10.0.1",
