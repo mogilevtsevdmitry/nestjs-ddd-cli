@@ -36,7 +36,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "g:domain": "node ./dist/main.js domain --",
-    "g:command": "node ./dist/main.js command"
+    "g:command": "node ./dist/main.js command",
+    "g:query": "node ./dist/main.js query"
   },
   "dependencies": {
     "commander": "^10.0.1",
@@ -78,10 +79,15 @@
     "coverageDirectory": "./coverage",
     "testEnvironment": "node",
     "roots": [
-      "<rootDir>/src/"
-    ]
+      "<rootDir>/src/",
+      "<rootDir>/libs/"
+    ],
+    "moduleNameMapper": {
+      "^@domains(|/.*)$": "<rootDir>/libs/$1"
+    }
   },
   "engines": {
     "node": ">=16.0.0"
-  }
+  },
+  "rootDir": "."
 }

@@ -1,12 +1,12 @@
 import { Logger } from '@nestjs/common';
-import { mkdir, writeFile } from 'fs-extra';
-import { COMMAND, COMMAND_HANDLER } from '../files';
-import { ICommandOptions } from '../interfaces';
-import { updateIndexFileContent } from './update-index-file';
-import { existsSync } from 'fs';
 import { format } from '@utils';
+import { existsSync } from 'fs';
+import { mkdir, writeFile } from 'fs-extra';
+import { QUERY, QUERY_HANDLER } from '../files';
+import { IQueryOptions } from '../interfaces';
+import { updateIndexFileContent } from './update-index-file';
 
-export const run = async (passedParams: string[], options: ICommandOptions, logger: Logger) => {
+export const run = async (passedParams: string[], options: IQueryOptions, logger: Logger) => {
     const [name] = passedParams;
     if (!name) {
         logger.error('Error: Please provide a name using --name option 🤨');
@@ -21,26 +21,26 @@ export const run = async (passedParams: string[], options: ICommandOptions, logg
         process.exit(1);
     }
 
-    const basePath = `libs/domains/src/${options.domain}-domain/application-services/commands/`;
+    const basePath = `libs/domains/src/${options.domain}-domain/application-services/queries/`;
     const domainPath = `${basePath}${name}`;
 
     if (existsSync(domainPath)) {
-        logger.error(`Error: Command "${name}" already exists 😔`);
+        logger.error(`Error: Query ${name} already exists 😔`);
         process.exit(1);
     }
 
-    const commandFilePath = `${domainPath}/${name}.command.ts`;
-    const commandHandlerFilePath = `${domainPath}/${name}.command-handler.ts`;
+    const queryFilePath = `${domainPath}/${name}.query.ts`;
+    const queryHandlerFilePath = `${domainPath}/${name}.query-handler.ts`;
     const indexFilePath = `${basePath}index.ts`;
 
     // Ensure directories exist
     await mkdir(domainPath, { recursive: true });
 
-    // Create command file
-    await writeFile(commandFilePath, COMMAND(name));
+    // Create query file
+    await writeFile(queryFilePath, QUERY(name));
 
-    // Create command handler file
-    await writeFile(commandHandlerFilePath, COMMAND_HANDLER(name));
+    // Create query handler file
+    await writeFile(queryHandlerFilePath, QUERY_HANDLER(name));
 
     // Update index file
     await updateIndexFileContent(indexFilePath, name);
