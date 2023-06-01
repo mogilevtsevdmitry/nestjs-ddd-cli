@@ -1,38 +1,28 @@
 ## Installation
-To install the application for generating folder and file structure for a domain in a NestJS project, you can use the `@webmogilevtsev/nestjs-ddd-cli` package. You can install it using the following command:
+To install the application for generating folder and file structures for your domain in a NestJS project, you can use the @webmogilevtsev/nestjs-ddd-cli package. You can install it using the following command:
 ```bash
 npm install @webmogilevtsev/nestjs-ddd-cli --save-dev
 ```
-After installing the package, you need to add a script to the package.json file so that you can run the `generate:domain` command. Add the following line to the `"scripts"` section:
-`"scripts"`:
+After installing the package, you need to add a script to the package.json file to be able to run the generate:domain command. Add the following line to the `"scripts"` section:
 ```bash
 "scripts": {
   ...
   "generate:domain": "ddd-cli domain --",
-  "generate:command": "ddd-cli command"
+  "generate:command": "ddd-cli command",
+  "generate:query": "ddd-cli query",
+  "generate:event": "ddd-cli event"
 }
 
 ```
-Now you can run the generate:domain command with the name argument to create a new domain:
-```
-npm run generate:domain --name=<domain-name>
-```
-The name argument sets the name of the new domain.
 
-To create a command, type:
-```
-npm run generate:command <command-name> --domain=<domain-name>
-```
-The domain argument specifies which domain to create the command for.
-
-## Global installation
-You can also install `@webmogilevtsev/nestjs-ddd-cli` globally to use the `generate-domain` command in any NestJS project. To do this, run the following command:
+## Global Installation
+You can also install @webmogilevtsev/nestjs-ddd-cli globally to use the generate-domain command in any NestJS project. To do this, run the following command:
 ```bash
 npm install -g @webmogilevtsev/nestjs-ddd-cli
 ```
-After global installation, you can run the generate-domain command from any folder on your computer:
+After the global installation, you can run the generate-domain command from any directory on your computer:
 ```bash
-generate-domain example
+generate-domain my-name
 ```
 
 ## Description
@@ -49,23 +39,209 @@ This is an application for generating folder and file structure for a domain in 
 - `domain/sagas`
 - `domain`
 
-## Command
+## Commands
+### generate:domain
+Domain generation
 
-To generate a new domain, you need to run the `generate:domain` command with the `name` argument, which sets the domain name:
+<b>Options:</b>
+
+<table>
+  <thead>
+    <th>#</th>
+    <th>Option Name</th>
+    <th>Short Name</th>
+    <th>Type</th>
+    <th>Required</th>
+    <th>Example</th>
+    <th>Description</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1)</td>
+      <td>--name</td>
+      <td>-n</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>--name=my-name | -n my-name</td>
+      <td>Sets the domain name</td>
+    </tr>
+    <tr>
+      <td>2)</td>
+      <td>--format</td>
+      <td>-f</td>
+      <td>Boolean</td>
+      <td>No</td>
+      <td>--format=true | -f</td>
+      <td>Performs formatting using prettier and eslint</td>
+    </tr>
+  </tbody>
+</table>
+
+To generate a new domain, run the generate:domain command with the name argument, which sets the domain name:
 ```bash
-npm run generate:domain -- --name=example
+npm run generate:domain --name=my-name --format=true
+# Shortened notation
+npm run generate:domain my-name -f
 ```
 
-The domain name must start with a small letter. If the domain name contains multiple words, they must be separated by hyphens. For example: `customer-order`.
+### generate:command
+Command generation
 
-To generate a new command, you need to run the `generate:command` command with a `name` argument that specifies the name of the command and a `domain` argument to specify which domain the command belongs to:
+<b>Options:</b>
+
+<table>
+  <thead>
+    <th>#</th>
+    <th>Option Name</th>
+    <th>Short Name</th>
+    <th>Type</th>
+    <th>Required</th>
+    <th>Example</th>
+    <th>Description</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1)</td>
+      <td>--name</td>
+      <td>-n</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>--name=my-name | -n my-name</td>
+      <td>Sets the command name</td>
+    </tr>
+    <tr>
+      <td>2)</td>
+      <td>--domain</td>
+      <td>-d</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>--domain=my-name | -d my-name</td>
+      <td>Specifies the domain for which to generate the command</td>
+    </tr>
+    <tr>
+      <td>3)</td>
+      <td>--format</td>
+      <td>-f</td>
+      <td>Boolean</td>
+      <td>No</td>
+      <td>--format=true | -f</td>
+      <td>Performs formatting using prettier and eslint</td>
+    </tr>
+  </tbody>
+</table>
+
+To generate a new command for a domain, run the generate:command command with the name, domain, and optional --format arguments:
 ```bash
-npm run generate:command --name=example -- --domain=example
-# Abbreviated notation
-npm run generate:command example -- -d example
+npm run generate:command --name=create-my-name -- --domain=my-name --format=true
+# Shortened notation
+npm run generate:command create-my-name -- -d my-name -f
 ```
 
-The domain name should start with a lowercase letter. If the domain name contains multiple words, they should be separated by hyphens. For example: `customer-order`.
+### generate:query
+Query generation
+
+<b>Options:</b>
+
+<table>
+  <thead>
+    <th>#</th>
+    <th>Option Name</th>
+    <th>Short Name</th>
+    <th>Type</th>
+    <th>Required</th>
+    <th>Example</th>
+    <th>Description</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1)</td>
+      <td>--name</td>
+      <td>-n</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>--name=my-name | -n my-name</td>
+      <td>Sets the query name</td>
+    </tr>
+    <tr>
+      <td>2)</td>
+      <td>--domain</td>
+      <td>-d</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>--domain=my-name | -d my-name</td>
+      <td>Specifies the domain for which to generate the query</td>
+    </tr>
+    <tr>
+      <td>3)</td>
+      <td>--format</td>
+      <td>-f</td>
+      <td>Boolean</td>
+      <td>No</td>
+      <td>--format=true | -f</td>
+      <td>Performs formatting using prettier and eslint</td>
+    </tr>
+  </tbody>
+</table>
+
+To generate a new query for a domain, run the generate:query command with the name, domain, and optional --format arguments:
+```bash
+npm run generate:query --name=get-one-my-name -- --domain=my-name --format=true
+# Shortened notation
+npm run generate:query get-one-my-name -- -d my-name -f
+```
+
+### generate:event
+Event generation
+
+<b>Options:</b>
+
+<table>
+  <thead>
+    <th>#</th>
+    <th>Option Name</th>
+    <th>Short Name</th>
+    <th>Type</th>
+    <th>Required</th>
+    <th>Example</th>
+    <th>Description</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1)</td>
+      <td>--name</td>
+      <td>-n</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>--name=my-name | -n my-name</td>
+      <td>Sets the event name</td>
+    </tr>
+    <tr>
+      <td>2)</td>
+      <td>--domain</td>
+      <td>-d</td>
+      <td>String</td>
+      <td>Yes</td>
+      <td>--domain=my-name | -d my-name</td>
+      <td>Specifies the domain for which to generate the event</td>
+    </tr>
+    <tr>
+      <td>3)</td>
+      <td>--format</td>
+      <td>-f</td>
+      <td>Boolean</td>
+      <td>No</td>
+      <td>--format=true | -f</td>
+      <td>Performs formatting using prettier and eslint</td>
+    </tr>
+  </tbody>
+</table>
+
+To generate a new event for a domain, run the generate:event command with the name, domain, and optional --format arguments:
+```bash
+npm run generate:event --name=my-name-created -- --domain=my-name --format=true
+# Shortened notation
+npm run generate:event my-name-created -- -d my-name -f
+```
 
 ## Directory Structure
 
@@ -113,9 +289,3 @@ libs/
 - `domain/` - directory containing the domain interface, as well as aggregates and other components.
 - `example-domain.module.ts` - module that combines all domain components.
 - `index.ts` - file exporting all domains from the src/ folder.
-
-## Usage
-After you have created a new domain using the `generate:domain` command, you can start working with its components. Typically, you will be adding new methods to domain services, configuring repositories, and creating new aggregates.
-
-## Conclusion
-In this guide, we have looked at how to create a NestJS application for generating folder and file structure for a new domain. We wrote the `generate:domain` command, which creates all necessary directories and files for a new domain, as well as updates the `libs/domains/src/index.ts` file to add the export of the new domain.

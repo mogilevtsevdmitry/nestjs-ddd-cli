@@ -8,21 +8,12 @@ npm install @webmogilevtsev/nestjs-ddd-cli --save-dev
 "scripts": {
   ...
   "generate:domain": "ddd-cli domain --",
-  "generate:command": "ddd-cli command"
+  "generate:command": "ddd-cli command",
+  "generate:query": "ddd-cli query",
+  "generate:event": "ddd-cli event"
 }
 
 ```
-Теперь вы можете запускать команду generate:domain с аргументом name, чтобы создать новый домен:
-```
-npm run generate:domain --name=<domain-name>
-```
-Аргумент name задает имя нового домена.
-
-Для создания команды наберите:
-```
-npm run generate:command <command-name> --domain=<domain-name>
-```
-Аргумент domain указывает для какого домена необходимо создать команду.
 
 ## Глобальная установка
 Вы также можете установить `@webmogilevtsev/nestjs-ddd-cli` глобально, чтобы использовать команду `generate-domain` в любом проекте на NestJS. Для этого выполните следующую команду:
@@ -31,7 +22,7 @@ npm install -g @webmogilevtsev/nestjs-ddd-cli
 ```
 После глобальной установки вы можете запускать команду `generate-domain` из любой папки на вашем компьютере:
 ```bash
-generate-domain example
+generate-domain my-name
 ```
 
 ## Описание
@@ -48,23 +39,203 @@ generate-domain example
 - `domain/sagas`
 - `domain`
 
-## Команда
+## Команды
+
+### generate:domain
+Генерация домена
+
+<b>Опции:</b>
+<table>
+  <thead>
+    <th>#</th>
+    <th>Наименование опции</th>
+    <th>Краткое наименование</th>
+    <th>Тип</th>
+    <th>Обязательное</th>
+    <th>Пример</th>
+    <th>Описание</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1)</td>
+      <td>--name</td>
+      <td>-n</td>
+      <td>Строка</td>
+      <td>Да</td>
+      <td>--name=my-name | -n my-name</td>
+      <td>Задает имя домена</td>
+    </tr>
+    <tr>
+      <td>2)</td>
+      <td>--format</td>
+      <td>-f</td>
+      <td>Логический</td>
+      <td>Нет</td>
+      <td>--format=true | -f</td>
+      <td>Запускает форматирование с помощью prettier и eslint</td>
+    </tr>
+  </tbody>
+</table>
 
 Чтобы сгенерировать новый домен, необходимо запустить команду `generate:domain` с аргументом `name`, который задает имя домена:
 ```bash
-npm run generate:domain --name=example
-```
-
-Имя домена должно начинаться с маленькой буквы. Если имя домена содержит несколько слов, они должны быть разделены дефисами. Например: `customer-order`.
-
-Чтобы сгенерировать новую команду, необходимо запустить команду `generate:command` с аргументом `name`, который задает имя команды и аргументом `domain`, чтобы указать к какому домену относится команда:
-```bash
-npm run generate:command --name=example -- --domain=example
+npm run generate:domain --name=my-name --format=true
 # Сокращенная запись
-npm run generate:command example -- -d example
+npm run generate:domain my-name -f
 ```
+### generate:command
+Генерация команды
 
-Имя домена должно начинаться с маленькой буквы. Если имя домена содержит несколько слов, они должны быть разделены дефисами. Например: `customer-order`.
+<b>Опции:</b>
+<table>
+  <thead>
+    <th>#</th>
+    <th>Наименование опции</th>
+    <th>Краткое наименование</th>
+    <th>Тип</th>
+    <th>Обязательное</th>
+    <th>Пример</th>
+    <th>Описание</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1)</td>
+      <td>--name</td>
+      <td>-n</td>
+      <td>Строка</td>
+      <td>Да</td>
+      <td>--name=my-name | -n my-name</td>
+      <td>Задает имя команды</td>
+    </tr>
+    <tr>
+      <td>2)</td>
+      <td>--domain</td>
+      <td>-d</td>
+      <td>Строка</td>
+      <td>Да</td>
+      <td>--domain=my-name | -d my-name</td>
+      <td>Указывается домен для которого необходимого сгенерировать команду</td>
+    </tr>
+    <tr>
+      <td>3)</td>
+      <td>--format</td>
+      <td>-f</td>
+      <td>Логический</td>
+      <td>Нет</td>
+      <td>--format=true | -f</td>
+      <td>Запускает форматирование с помощью prettier и eslint</td>
+    </tr>
+  </tbody>
+</table>
+
+Чтобы сгенерировать новую команду домена, необходимо запустить команду `generate:command` с аргументами `name`, `domain` и необязательным `--format`:
+```bash
+npm run generate:command --name=create-my-name -- --domain=my-name --format=true
+# Сокращенная запись
+npm run generate:command create-my-name -- -d my-name -f
+```
+### generate:query
+Генерация запроса
+
+<b>Опции:</b>
+<table>
+  <thead>
+    <th>#</th>
+    <th>Наименование опции</th>
+    <th>Краткое наименование</th>
+    <th>Тип</th>
+    <th>Обязательное</th>
+    <th>Пример</th>
+    <th>Описание</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1)</td>
+      <td>--name</td>
+      <td>-n</td>
+      <td>Строка</td>
+      <td>Да</td>
+      <td>--name=my-name | -n my-name</td>
+      <td>Задает имя запроса</td>
+    </tr>
+    <tr>
+      <td>2)</td>
+      <td>--domain</td>
+      <td>-d</td>
+      <td>Строка</td>
+      <td>Да</td>
+      <td>--domain=my-name | -d my-name</td>
+      <td>Указывается домен для которого необходимого сгенерировать запрос</td>
+    </tr>
+    <tr>
+      <td>3)</td>
+      <td>--format</td>
+      <td>-f</td>
+      <td>Логический</td>
+      <td>Нет</td>
+      <td>--format=true | -f</td>
+      <td>Запускает форматирование с помощью prettier и eslint</td>
+    </tr>
+  </tbody>
+</table>
+
+Чтобы сгенерировать новый запрос домена, необходимо запустить команду `generate:query` с аргументами `name`, `domain` и необязательным `--format`:
+```bash
+npm run generate:query --name=get-one-my-name -- --domain=my-name --format=true
+# Сокращенная запись
+npm run generate:query get-one-my-name -- -d my-name -f
+```
+### generate:event
+Генерация события
+
+<b>Опции:</b>
+<table>
+  <thead>
+    <th>#</th>
+    <th>Наименование опции</th>
+    <th>Краткое наименование</th>
+    <th>Тип</th>
+    <th>Обязательное</th>
+    <th>Пример</th>
+    <th>Описание</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1)</td>
+      <td>--name</td>
+      <td>-n</td>
+      <td>Строка</td>
+      <td>Да</td>
+      <td>--name=my-name | -n my-name</td>
+      <td>Задает имя события</td>
+    </tr>
+    <tr>
+      <td>2)</td>
+      <td>--domain</td>
+      <td>-d</td>
+      <td>Строка</td>
+      <td>Да</td>
+      <td>--domain=my-name | -d my-name</td>
+      <td>Указывается домен для которого необходимого сгенерировать событие</td>
+    </tr>
+    <tr>
+      <td>3)</td>
+      <td>--format</td>
+      <td>-f</td>
+      <td>Логический</td>
+      <td>Нет</td>
+      <td>--format=true | -f</td>
+      <td>Запускает форматирование с помощью prettier и eslint</td>
+    </tr>
+  </tbody>
+</table>
+
+Чтобы сгенерировать новое событие домена, необходимо запустить команду `generate:event` с аргументами `name`, `domain` и необязательным `--format`:
+```bash
+npm run generate:event --name=my-name-created -- --domain=my-name --format=true
+# Сокращенная запись
+npm run generate:event my-name-created -- -d my-name -f
+```
 
 ## Структура каталогов
 
@@ -73,7 +244,7 @@ npm run generate:command example -- -d example
 libs/
   domains/
     src/
-      example-domain/
+      my-name-domain/
         application-services/
           commands/
             index.ts
@@ -82,22 +253,22 @@ libs/
           events/
             index.ts
           facade/
-            example-facade.factory.ts
-            example-facade.service.ts
+            my-name-facade.factory.ts
+            my-name-facade.service.ts
           queries/
             index.ts
         domain/
           services/
-            example-domain.service.ts
-          example-domain.interface.ts
-          example-domain.aggregate.ts
+            my-name-domain.service.ts
+          my-name-domain.interface.ts
+          my-name-domain.aggregate.ts
           index.ts
         repositories/
-          example-domain-repository.abstract.ts
+          my-name-domain-repository.abstract.ts
           index.ts
         sagas/
-          example-domain-saga.service.ts
-        example-domain.module.ts
+          my-name-domain-saga.service.ts
+        my-name-domain.module.ts
         index.ts
     index.ts
 ```
@@ -110,12 +281,5 @@ libs/
 - `domain/repositories/` - каталог с репозиториями домена, которые осуществляют доступ к данным.
 - `domain/sagas/` - каталог с сагами, которые координируют сложные потоки работы между компонентами домена.
 - `domain/` - каталог, содержащий интерфейс домена, а также агрегаты и другие компоненты.
-- `example-domain.module.ts` - модуль, объединяющий все компоненты домена.
+- `my-name-domain.module.ts` - модуль, объединяющий все компоненты домена.
 - `index.ts` - файл, экспортирующий все домены из папки src/.
-
-## Использование
-
-После того, как вы создали новый домен с помощью команды `generate:domain`, вы можете начать работать с его компонентами. Обычно вы будете добавлять новые методы в сервисы домена, настраивать репозитории и создавать новые агрегаты.
-
-## Заключение
-В этом руководстве мы рассмотрели, как создать приложение на NestJS для генерации структуры папок и файлов для нового домена. Мы написали команду `generate:domain`, которая создает все необходимые каталоги и файлы для нового домена, а также обновляет файл `libs/domains/src/index.ts` для добавления экспорта нового домена.
