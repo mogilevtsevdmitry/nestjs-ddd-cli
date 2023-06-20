@@ -9,8 +9,9 @@ export class ${capitalizeName(name)}EventHandler implements IEventHandler {
     private readonly logger = new Logger(${capitalizeName(name)}EventHandler.name);
     constructor() {}
 
-    handle(event: ${capitalizeName(name)}Event): Promise<void> {
+    handle(event: ${capitalizeName(name)}Event): ${capitalizeName(name)}Event {
         // your code here
+        return event;
     }
 }
 `;
