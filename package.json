@@ -1,6 +1,6 @@
 {
   "name": "@webmogilevtsev/nestjs-ddd-cli",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "Domain Driven Design (DDD) Structure Generator is a CLI tool for quickly creating well-organized application architectures based on DDD principles. It generates boilerplate code for essential building blocks, allowing developers to focus on solving complex business problems while reducing development time and enhancing software quality.",
   "author": "Mogilevtsev Dmitry <webmogilevtsev@ya.ru>",
   "license": "MIT",
@@ -41,25 +41,25 @@
     "g:event": "node ./dist/main.js event"
   },
   "dependencies": {
-    "@nestjs/cqrs": "^10.0.0",
-    "commander": "^10.0.1",
+    "@nestjs/cqrs": "^10.2.5",
+    "commander": "^11.0.0",
     "fs-extra": "^11.1.1",
-    "nest-commander": "^3.7.0",
+    "nest-commander": "^3.12.0",
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.1",
-    "@types/node": "18.15.11",
-    "@typescript-eslint/eslint-plugin": "^5.0.0",
-    "@typescript-eslint/parser": "^5.0.0",
-    "eslint": "^8.0.1",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.3.2",
-    "ts-loader": "^9.2.3",
-    "ts-node": "^10.0.0",
+    "@types/node": "20.6.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
+    "eslint": "^8.49.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.3",
+    "ts-loader": "^9.4.4",
+    "ts-node": "^10.9.1",
     "tsconfig-paths": "4.2.0",
-    "typescript": "^4.7.4"
+    "typescript": "^5.2.2"
   },
   "jest": {
     "moduleFileExtensions": [
