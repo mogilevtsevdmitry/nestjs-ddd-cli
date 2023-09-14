@@ -5,11 +5,11 @@ import { QueryHandler, IQueryHandler } from '@nestjs/cqrs';
 import { ${capitalizeName(name)}Query } from './${name}.query';
 
 @QueryHandler(${capitalizeName(name)}Query)
-export class ${capitalizeName(name)}QueryHandler implements IQueryHandler<${capitalizeName(name)}Query, void> {
+export class ${capitalizeName(name)}QueryHandler implements IQueryHandler<${capitalizeName(name)}Query, any> {
     private readonly logger = new Logger(${capitalizeName(name)}QueryHandler.name);
     constructor() {}
 
-    async execute(query: ${capitalizeName(name)}Query): Promise<void> {
+    async execute(query: ${capitalizeName(name)}Query): Promise<any> {
         // your code here
     }
 }
