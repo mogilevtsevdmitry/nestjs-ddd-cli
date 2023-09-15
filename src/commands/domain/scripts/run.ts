@@ -5,6 +5,7 @@ import { join } from 'path';
 import { defaultFiles } from '../files/default';
 import { defaultStructures } from '../folders/default';
 import { generateDomainsAdapter } from './generate-domains-adapter';
+import { generateAdapterService } from './generate-adapter-service';
 
 export const run = (inputs: string[], ...args: Array<() => void>) => {
     const logger = new Logger('[Scripts] run');
@@ -43,6 +44,8 @@ export const run = (inputs: string[], ...args: Array<() => void>) => {
 
     // Generate domains adapters
     generateDomainsAdapter(name, logger);
+    // Generate adapter service
+    generateAdapterService(name, logger);
 
     logger.verbose(`Domain structure for ${name} has been generated successfully.`);
 };

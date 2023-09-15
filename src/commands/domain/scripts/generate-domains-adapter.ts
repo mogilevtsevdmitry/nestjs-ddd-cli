@@ -26,7 +26,7 @@ function addModule(fileContent: string, name: string) {
     const lowerName = name.toLowerCase();
 
     // Prepare new lines to be added
-    const newImportLines = `import { ${Name}DomainModule } from '@domains/${lowerName}-domain';\nimport { ${Name}AdapterService } from './${lowerName}-adapter/${lowerName}-adapter-service';`;
+    const newImportLines = `import { ${Name}DomainModule } from '@domains/${lowerName}-domain';\nimport { ${Name}AdapterService } from './${lowerName}-adapter/${lowerName}-adapter.service';`;
     const newModuleEntry = `        ${Name}DomainModule.register({ ${lowerName}Providers: ${Name}AdapterService }),`;
     const newProvider = `        ${Name}AdapterService,`;
     const newExport = `        ${Name}DomainModule,`;
