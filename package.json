@@ -20,7 +20,6 @@
   "bin": {
     "ddd-cli": "./bin/generate"
   },
-  "readme_en_md_content": "[English readme content goes here]",
   "readme_ru_md_content": "[Russian readme content goes here]",
   "scripts": {
     "build": "nest build",
