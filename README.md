@@ -29,15 +29,17 @@ generate-domain my-name
 
 This is an application for generating folder and file structure for a domain in a NestJS project. The `generate:domain` command generates the folder and file structure for a new domain, including the following directories:
 
-- `application-services/commands`
-- `application-services/dto`
-- `application-services/events`
-- `application-services/facade`
-- `application-services/queries`
-- `domain/services`
-- `domain/repositories`
-- `domain/sagas`
-- `domain`
+- `libs/domains/src/${name}-domain/application-services/commands`
+- `libs/domains/src/${name}-domain/application-services/dto`
+- `libs/domains/src/${name}-domain/application-services/events`
+- `libs/domains/src/${name}-domain/application-services/facade`
+- `libs/domains/src/${name}-domain/application-services/queries`
+- `libs/domains/src/${name}-domain/domain/services`
+- `libs/domains/src/${name}-domain/domain/repositories`
+- `libs/domains/src/${name}-domain/domain/sagas`
+- `libs/domains/src/${name}-domain/domain`
+- `src/infrastructure/${name}-adapter/${name}-adapter.service`
+- `src/infrastructure/infrastructure-module`
 
 ## Commands
 ### generate:domain
