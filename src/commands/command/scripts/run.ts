@@ -1,10 +1,10 @@
 import { Logger } from '@nestjs/common';
+import { format } from '@utils';
+import { existsSync } from 'fs';
 import { mkdir, writeFile } from 'fs-extra';
 import { COMMAND, COMMAND_HANDLER } from '../files';
 import { ICommandOptions } from '../interfaces';
 import { updateIndexFileContent } from './update-index-file';
-import { existsSync } from 'fs';
-import { format } from '@utils';
 
 export const run = async (passedParams: string[], options: ICommandOptions, logger: Logger) => {
     const [name] = passedParams;

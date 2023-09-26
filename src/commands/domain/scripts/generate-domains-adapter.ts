@@ -3,10 +3,8 @@ import { capitalizeName } from '@utils';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { dirname, join } from 'path';
 
-// Путь к файлу
-const filePath = join('src', 'infrastructure', 'infrastructure-module.ts');
+const filePath = (apps: string) => join(apps, 'src', 'infrastructure', 'infrastructure-module.ts');
 
-// Начальное содержимое файла
 const initialContent = `import { Global, Module } from '@nestjs/common';
 
 @Global()
@@ -46,27 +44,20 @@ function addModule(fileContent: string, name: string) {
     return `${updatedImports}\n\n@Global()${updatedModule}`;
 }
 
-export const generateDomainsAdapter = (name: string, logger: Logger) => {
+export const generateDomainsAdapter = (name: string, logger: Logger, apps = '') => {
     try {
-        // Проверяем, существует ли файл
-        if (!existsSync(filePath)) {
-            // Создаем необходимые директории, если они не существуют
-            mkdirSync(dirname(filePath), { recursive: true });
-
-            // Создаем файл с начальным содержимым
-            writeFileSync(filePath, initialContent);
+        if (!existsSync(filePath(apps))) {
+            mkdirSync(dirname(filePath(apps)), { recursive: true });
+            writeFileSync(filePath(apps), initialContent);
         }
 
-        // Читаем текущее содержимое файла
-        let fileContent = readFileSync(filePath, 'utf-8');
+        let fileContent = readFileSync(filePath(apps), 'utf-8');
 
-        // Добавляем модули
         fileContent = addModule(fileContent, name);
 
-        // Сохраняем обновленное содержимое файла
-        writeFileSync(filePath, fileContent);
+        writeFileSync(filePath(apps), fileContent);
 
-        logger.verbose(`File ${filePath} has been updated.`);
+        logger.verbose(`File ${filePath(apps)} has been updated.`);
     } catch (error) {
         logger.error(error);
     }
