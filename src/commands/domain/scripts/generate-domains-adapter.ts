@@ -1,9 +1,9 @@
 import { Logger } from '@nestjs/common';
-import { capitalizeName } from '@utils';
+import { capitalizeName, lowerName } from '@utils';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { dirname, join } from 'path';
 
-const filePath = (apps: string) => join(apps, 'src', 'infrastructure', 'infrastructure-module.ts');
+const filePath = (apps: string) => join(apps, 'src', 'infrastructure', 'infrastructure.module.ts');
 
 const initialContent = `import { Global, Module } from '@nestjs/common';
 
@@ -21,11 +21,12 @@ export class InfrastructureModule {}
 
 function addModule(fileContent: string, name: string) {
     const Name = capitalizeName(name);
-    const lowerName = name.toLowerCase();
 
     // Prepare new lines to be added
-    const newImportLines = `import { ${Name}DomainModule } from '@domains/${lowerName}-domain';\nimport { ${Name}AdapterService } from './${lowerName}-adapter/${lowerName}-adapter.service';`;
-    const newModuleEntry = `        ${Name}DomainModule.register({ ${lowerName}Providers: ${Name}AdapterService }),`;
+    const newImportLines = `import { ${Name}DomainModule } from '@domains/${name.toLowerCase()}-domain';\nimport { ${Name}AdapterService } from './${name.toLowerCase()}-adapter/${name.toLowerCase()}-adapter.service';`;
+    const newModuleEntry = `        ${Name}DomainModule.register({ ${lowerName(
+        name,
+    )}Providers: ${Name}AdapterService }),`;
     const newProvider = `        ${Name}AdapterService,`;
     const newExport = `        ${Name}DomainModule,`;
 

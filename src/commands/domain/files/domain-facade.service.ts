@@ -2,7 +2,7 @@ import { capitalizeName } from '@utils';
 import { join } from 'path';
 
 export const DOMAIN_FACADE_SERVICE = (basePath: string, name: string) => ({
-    path: join(basePath, 'application-services', 'facade', `${name}-facade.service.ts`),
+    path: join(basePath, 'application-services', 'facade', `${name.toLowerCase()}-facade.service.ts`),
     content: `import { Injectable } from '@nestjs/common';
 import { CommandBus, EventBus, QueryBus } from '@nestjs/cqrs';
 

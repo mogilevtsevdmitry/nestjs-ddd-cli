@@ -10,7 +10,7 @@ export const checkAppsFolder = async (appsFolderPath: string) => {
                     {
                         type: 'list',
                         name: 'selectedApp',
-                        message: 'Какой проект вы хотите выбрать?',
+                        message: 'Which project do you want to choose?',
                         choices: apps,
                     },
                 ]);
