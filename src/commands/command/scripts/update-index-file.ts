@@ -1,7 +1,8 @@
+import { Logger } from '@nestjs/common';
 import { capitalizeName } from '@utils';
 import { readFile, writeFile } from 'fs-extra';
 
-export const updateIndexFileContent = async (filePath: string, name: string) => {
+export const updateIndexFileContent = async (filePath: string, name: string, logger: Logger) => {
     const content = await readFile(filePath, 'utf8');
     const Name = capitalizeName(name);
 
@@ -63,4 +64,5 @@ export * from './${name}/${name}.command-handler';`;
     ].join('\n');
 
     await writeFile(filePath, updatedContent, 'utf8');
+    logger.verbose(`UPDATED ${filePath}`);
 };

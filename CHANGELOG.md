@@ -1,4 +1,9 @@
 # v2.2.2
+## 🐛 Change
+- Fixed text error
+- Fixed naming
+
+# v2.2.2
 ## ➕ Add
 - Added infrastructure layer generation
 - Added a check for the presence of the apps folder in the project for generating the infrastructure layer in the selected project

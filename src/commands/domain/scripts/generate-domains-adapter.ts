@@ -53,11 +53,9 @@ export const generateDomainsAdapter = (name: string, logger: Logger, apps = '') 
         }
 
         let fileContent = readFileSync(filePath(apps), 'utf-8');
-
         fileContent = addModule(fileContent, name);
 
         writeFileSync(filePath(apps), fileContent);
-
         logger.verbose(`File ${filePath(apps)} has been updated.`);
     } catch (error) {
         logger.error(error);

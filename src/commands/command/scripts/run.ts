@@ -38,12 +38,14 @@ export const run = async (passedParams: string[], options: ICommandOptions, logg
 
     // Create command file
     await writeFile(commandFilePath, COMMAND(name));
+    logger.log(`CREATE ${commandFilePath}`);
 
     // Create command handler file
     await writeFile(commandHandlerFilePath, COMMAND_HANDLER(name));
+    logger.log(`CREATE ${commandHandlerFilePath}`);
 
     // Update index file
-    await updateIndexFileContent(indexFilePath, name);
+    await updateIndexFileContent(indexFilePath, name, logger);
 
     // if passed format option - run formatting
     if (options?.format) {

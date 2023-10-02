@@ -38,12 +38,14 @@ export const run = async (passedParams: string[], options: IQueryOptions, logger
 
     // Create query file
     await writeFile(queryFilePath, QUERY(name));
+    logger.log(`CREATE ${queryFilePath}`);
 
     // Create query handler file
     await writeFile(queryHandlerFilePath, QUERY_HANDLER(name));
+    logger.log(`CREATE ${queryHandlerFilePath}`);
 
     // Update index file
-    await updateIndexFileContent(indexFilePath, name);
+    await updateIndexFileContent(indexFilePath, name, logger);
 
     // if passed format option - run formatting
     if (options?.format) {

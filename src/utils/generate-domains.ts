@@ -62,7 +62,47 @@ export const generateDomains = () => {
         // Update test/jest-e2e.json
         logger.verbose('UPDATING test/jest-e2e.json...');
         const jestE2EPath = join(process.cwd(), 'test', 'jest-e2e.json');
+        if (!fs.existsSync(jestE2EPath)) {
+            const configContent = {
+                moduleFileExtensions: ['js', 'json', 'ts'],
+                rootDir: '.',
+                testEnvironment: 'node',
+                testRegex: '.e2e-spec.ts$',
+                transform: {
+                    '^.+\\.(t|j)s$': 'ts-jest',
+                },
+            };
+            fs.writeFileSync(jestE2EPath, JSON.stringify(configContent, null, 2), 'utf8');
+        }
         const jestE2E = JSON.parse(fs.readFileSync(jestE2EPath, 'utf8'));
+
+        // check app.e2e-spec.ts
+        const appE2EspecPath = join(process.cwd(), 'test', 'app.e2e-spec.ts');
+        if (!fs.existsSync(appE2EspecPath)) {
+            const appE2Espec = `import { Test, TestingModule } from '@nestjs/testing';
+import { INestApplication } from '@nestjs/common';
+import * as request from 'supertest';
+import { AppModule } from './../src/app.module';
+
+describe('AppController (e2e)', () => {
+    let app: INestApplication;
+
+    beforeEach(async () => {
+        const moduleFixture: TestingModule = await Test.createTestingModule({
+            imports: [AppModule],
+        }).compile();
+
+        app = moduleFixture.createNestApplication();
+        await app.init();
+    });
+
+    it('/ (GET)', () => {
+        return request(app.getHttpServer()).get('/').expect(200).expect('Hello World!');
+    });
+});
+`;
+            fs.writeFileSync(appE2EspecPath, appE2Espec, 'utf8');
+        }
 
         // Add moduleNameMapper
         if (!jestE2E.moduleNameMapper) {

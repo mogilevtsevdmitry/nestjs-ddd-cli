@@ -38,12 +38,14 @@ export const run = async (passedParams: string[], options: IEventOptions, logger
 
     // Create event file
     await writeFile(eventFilePath, EVERY(name));
+    logger.log(`CREATE ${eventFilePath}`);
 
     // Create event handler file
     await writeFile(eventHandlerFilePath, EVENT_HANDLER(name));
+    logger.log(`CREATE ${eventHandlerFilePath}`);
 
     // Update index file
-    await updateIndexFileContent(indexFilePath, name);
+    await updateIndexFileContent(indexFilePath, name, logger);
 
     // if passed format option - run formatting
     if (options?.format) {
