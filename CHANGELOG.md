@@ -1,4 +1,8 @@
-# v2.2.2
+# v2.2.4
+## 🐛 Change
+- Update readme
+  
+# v2.2.3
 ## 🐛 Change
 - Fixed text error
 - Fixed naming

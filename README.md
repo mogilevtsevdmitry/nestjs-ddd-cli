@@ -279,6 +279,11 @@ libs/
         example-domain.module.ts
         index.ts
     index.ts
+src/
+  infrastructure/
+    example-adapter/
+      example-adapter.service
+    infrastructure-module.ts
 ```
 - `application-services/commands/` - directory with commands for managing the domain.
 - `application-services/dto/` - directory with data transfer objects for use in the application.
@@ -291,3 +296,4 @@ libs/
 - `domain/` - directory containing the domain interface, as well as aggregates and other components.
 - `example-domain.module.ts` - module that combines all domain components.
 - `index.ts` - file exporting all domains from the src/ folder.
+- `infrastructure/` - implementation layer
