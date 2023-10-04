@@ -1,3 +1,7 @@
+# v2.2.5
+## 🐛 Change
+- Update dependencies
+
 # v2.2.4
 ## 🐛 Change
 - Update readme
