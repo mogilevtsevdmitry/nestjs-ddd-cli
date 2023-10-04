@@ -48,7 +48,7 @@
     "binary-extensions": "^2.2.0",
     "commander": "^8.3.0",
     "fs-extra": "^11.1.1",
-    "inquirer": "^9.2.11",
+    "inquirer": "^8.0.0",
     "nest-commander": "^3.12.0",
     "reflect-metadata": "^0.1.13",
     "supertest": "^6.3.3"
